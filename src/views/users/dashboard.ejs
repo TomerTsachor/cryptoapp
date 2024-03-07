@@ -4,11 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CryptoApp Dashboard</title>
+    <script src="https://cdn.socket.io/4.7.4/socket.io.min.js" integrity="sha384-Gr6Lu2Ajx28mzwyVR8CFkULdCU7kMlZ9UthllibdOSo6qAiN+yXNHqtgdTvFXMT4" crossorigin="anonymous"></script>
+    <script>
+        const socket = io('ws://<%= io.host %>:<%= io.port%>')
+        socket.on('update your list', message => {
+            /*
+            {
+                symbol: 'BTC',
+                value: 67895.76
+            }
+            */
+            console.log("received an ", message)
+            const {symbol, value} = message;
+            document.getElementById(`${symbol}-value`).innerHTML = value
+        })
+    </script>
 </head>
 <body>
+    <a href="/users/logout">logout</a>
+
     <form method="POST" action="symbols/add"> 
         <input type="text" name="symbol" placeholder="crypto token">
         <button>Add</button>
     </form>
+
+    <br/>
+    <br/>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% userSymbols.forEach(userSymbol => { %>
+                <tr>
+                    <td><%= userSymbol?.symbol %></td>
+                    <td id="<%= userSymbol?.symbol%>-value"><%= symbolValues.find(e => e?.symbol === userSymbol?.symbol)?.value %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
 </body>
 </html>

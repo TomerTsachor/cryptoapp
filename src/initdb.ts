@@ -14,7 +14,6 @@ import config from 'config';
 
 const connection = mysql.createConnection(config.get('mysql'))
 const connect = util.promisify(connection.connect).bind(connection);
-
 const query = util.promisify(connection.query).bind(connection);
 (async () => {
   try {
@@ -22,15 +21,12 @@ const query = util.promisify(connection.query).bind(connection);
     console.log("Connected!");
 
     await query(`
-    CREATE TABLE users (
-      id int auto_increment,
-      username varchar(255) not null,
-      password varchar(255) not null,
-      email varchar(255) not null,
-      birthday date not null,
-      primary key (id)
-    )    
-  `);
+        CREATE TABLE IF NOT EXISTS users (
+            id int auto_increment,
+            github_id varchar(255) not null,
+            primary key (id)
+        ) 
+    `);
     console.log("created table users!");
 
     await query(`
@@ -38,10 +34,12 @@ const query = util.promisify(connection.query).bind(connection);
         id int auto_increment,
         user_id int not null,
         symbol varchar(3) not null,
-        primary key (id)
+        primary key (id),
+        CONSTRAINT unique_user_id_symbol UNIQUE (user_id, symbol)
       ) 
   `);
   console.log("created table users!");
+  connection.end()
 
   } catch (e) {
     console.log(e);

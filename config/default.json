@@ -1,6 +1,20 @@
 {
     "app":{
-        "port":8082
+        "port":8080,
+        "io":{
+            "host": "localhost",
+            "port": 8084
+        }
+    },
+    "worker":{
+        "interval":30000,
+        "io":{
+            "host": "localhost",
+            "port": 8084
+        }
+    },
+    "io":{
+        "port": 8084
     },
     "mysql":{
         "host": "localhost",
@@ -8,5 +22,15 @@
         "user": "root",
         "password": "",
         "database": "cryptoapp"
-}
+},
+    "mongo":{
+        "host": "localhost",
+        "port": 27017,
+        "database": "cryptoapp"
+    },
+    "github":{
+        "clientID": "74b38049818b8c540601",
+        "clientSecret": "",
+        "callBackURL": "http://localhost:8080/github/callback"
+    }
 }
