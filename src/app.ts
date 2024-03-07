@@ -5,14 +5,14 @@ import config from 'config';
 import errorHandler from './middlerwares/error/error-handler';
 import session from 'express-session';
 import auth from './middlerwares/github-auth'
-
-import usersRouter from './routers/users';
+  
 import guestsRouter from './routers/guests';
 import githubRouter from './routers/github';
 
 const server = express();
-server.set('views', path.resolve(__dirname,'views'));
-server.set('view engine','ejs');
+// views setup
+server.set('views', path.resolve(__dirname, 'views'));
+server.set('view engine', 'ejs');
 
 
 server.use(session({

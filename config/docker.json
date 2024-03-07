@@ -1,0 +1,11 @@
+{
+    "io": {
+        "port": 3000
+    },
+    "mysql": {
+        "host": "host.docker.internal"
+    },
+    "mongo": {
+        "host": "host.docker.internal"
+    }
+} 

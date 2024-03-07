@@ -5,7 +5,8 @@
   "main": "src",
   "scripts": {
     "start:dev": "ts-node src/initdb.ts && nodemon --exec ts-node src/app.ts",
-    "build": "tsc",
+    "start": "node ./dist/initdb && node ./dist/app",
+    "build": "tsc && cp -r ./config ./dist/config && cp -r ./src/views ./dist/views",
     "worker": "ts-node src/worker",
     "io": "npx ts-node src/io",
     "test": "echo \"Error: no test specified\" && exit 1"

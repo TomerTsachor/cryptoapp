@@ -1,0 +1,24 @@
+{
+    "app": {
+        "port": 3000,
+        "io": {
+            "port": 8186
+        }
+    },
+    "io": {
+        "port": 3000
+    },
+    "mysql": {
+        "host": "mysql",
+        "port": 3306
+    },
+    "mongo": {
+        "host": "mongo"
+    },
+    "worker": {
+        "io": {
+            "host": "io",
+            "port": 3000
+        }
+    }
+}
