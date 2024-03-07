@@ -21,7 +21,16 @@ const query = util.promisify(connection.query).bind(connection);
     await connect();
     console.log("Connected!");
 
-    await query("");
+    await query(`
+    CREATE TABLE users (
+      id int auto_increment,
+      username varchar(255) not null,
+      password varchar(255) not null,
+      email varchar(255) not null,
+      birthday date not null,
+      primary key (id)
+    )    
+  `);
     console.log("created table users!");
 
     await query(`
